@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+   http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/aop
+   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+    <!--spring对象注入开始-->
+    <!--这一句话代表可以使用注解模式来注入对象，只不过需要在引用类对象的地方使用@Autowired进行备注-->
+    <!--<context:annotation-config />-->
+<!--&lt;!&ndash;    一个bean即使一个类，有程序使用bean的使用，property就会代表类中的属性并未它们注入设定的值&ndash;&gt;-->
+    <!--<bean name="c" class="com.myself.pojo.Category">-->
+        <!--<property name="name" value="category 1" />-->
+    <!--</bean>-->
+
+    <!--<bean name="p" class="com.myself.pojo.Product">-->
+        <!--<property name="name" value="product1"  />-->
+        <!--<property name="category" ref="c" />-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;切面内容开始&ndash;&gt;-->
+
+    <!--&lt;!&ndash;切面主业务&ndash;&gt;-->
+    <!--<bean name="s" class="com.myself.service.ProductService">-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;切面子业务&ndash;&gt;-->
+    <!--<bean id="loggerAspect" class="com.myself.aspect.LoggerAspect" />-->
+    <!--<aop:config>-->
+        <!--&lt;!&ndash;我的理解是，pointcut指向主任务，pointcut代表子业务要围绕这个主要的业务去执行&ndash;&gt;-->
+        <!--<aop:pointcut id="loggerCutpoint" expression="execution(* com.myself.service.ProductService.*(..))" />-->
+        <!--&lt;!&ndash;这里aspect是切面子业务类，around代表这个子类需要启动的业务&ndash;&gt;-->
+        <!--<aop:aspect id="logAspect" ref="loggerAspect">-->
+            <!--<aop:around method="log" pointcut-ref="loggerCutpoint" />-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+
+
+    <!--切面内容结束-->
+
+    <!--spring对象注入结束-->
+
+
+
+
+
+    <!---->
+    <!--通過這一句話就可以實現不需要配置bean，但是需要在類前面加上@Component註解，屬性的初始化也要在類中直接進行-->
+    <context:component-scan base-package="com.myself.pojo" />
+    <context:component-scan base-package="com.myself.aspect" />
+    <context:component-scan base-package="com.myself.service" />
+    <aop:aspectj-autoproxy />
+
+
+
+
+
+
+
+
+
+
+
+
+</beans>
